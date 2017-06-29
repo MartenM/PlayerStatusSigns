@@ -1,0 +1,5 @@
+main: tk.martenm.playerstatussigns.MainClass
+name: PlayerStatusSigns
+prefix: Player Status Signs
+author: [MartenM]
+description: "Player status signs allows you to create signs that shows the status of a player!"
