@@ -1,0 +1,41 @@
+# ______ _                         _____ _        _               _____ _
+# | ___ \ |                       /  ___| |      | |             /  ___(_)
+# | |_/ / | __ _ _   _  ___ _ __  \ `--.| |_ __ _| |_ _   _ ___  \ `--. _  __ _ _ __  ___
+# |  __/| |/ _` | | | |/ _ \ '__|  `--. \ __/ _` | __| | | / __|  `--. \ |/ _` | '_ \/ __|
+# | |   | | (_| | |_| |  __/ |    /\__/ / || (_| | |_| |_| \__ \ /\__/ / | (_| | | | \__ \
+# \_|   |_|\__,_|\__, |\___|_|    \____/ \__\__,_|\__|\__,_|___/ \____/|_|\__, |_| |_|___/
+#                 __/ |                                                    __/ |
+#                |___/                                                    |___/
+#    By: MartenM
+#
+#----------------------------------------------------------------------------------------------
+#  Place Holders
+#  %player% - The players name
+#
+formats:
+#
+# Format date
+  date: "dd:MM:yyyy"
+#
+# The format for when someone is online.
+  online:
+    - "x-&a^&r-x"
+    - "%player%"
+    - "&aOnline"
+    - "x-&av&r-x"
+#
+# The format used when someone is offline
+  offline:
+    - "x-&c^&r-x"
+    - "%player%"
+    - "&c%since%"
+    - "x-&cv&r-x"
+#
+# The format used when someone is afk
+  afk:
+    - "x-&e^&r-x"
+    - "%player%"
+    - "&eAFK"
+    - "x-&ev&r-x"
+#
+#
