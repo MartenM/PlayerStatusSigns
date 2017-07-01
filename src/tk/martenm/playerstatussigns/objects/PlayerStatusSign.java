@@ -30,11 +30,11 @@ public class PlayerStatusSign {
         this.uuid = uuid;
     }
 
-    public void updateSign(){
+    public void updateSign() {
         Sign sign;
         try {
             sign = getSign();
-        } catch (Exception ex){
+        } catch (Exception ex) {
             plugin.signs.remove(this);
             return;
         }
@@ -42,14 +42,14 @@ public class PlayerStatusSign {
         OfflinePlayer offline_player = plugin.getServer().getOfflinePlayer(uuid);
 
         //Player is online
-        if(offline_player.isOnline()){
+        if (offline_player.isOnline()) {
             Player player = plugin.getServer().getPlayer(uuid);
 
             //Essentials AFK check
-            if(plugin.essentials != null){
-                if(plugin.essentials.getUser(uuid).isAfk()){
+            if (plugin.essentials != null) {
+                if (plugin.essentials.getUser(uuid).isAfk()) {
                     List<String> list = plugin.getConfig().getStringList("format.afk");
-                    for(int i = 0; i < 4; i++){
+                    for (int i = 0; i < 4; i++) {
                         sign.setLine(i, ChatColor.translateAlternateColorCodes('&', list.get(i)
                                 .replace("%player%", player.getName())));
                     }
@@ -60,24 +60,25 @@ public class PlayerStatusSign {
 
             //Online and/or not afk
             List<String> list = plugin.getConfig().getStringList("format.online");
-            for(int i = 0; i < 4; i++){
+            for (int i = 0; i < 4; i++) {
                 sign.setLine(i, ChatColor.translateAlternateColorCodes('&', list.get(i)
                         .replace("%player%", player.getName())));
             }
+            return;
         }
         //Player is NOT online
-        else{
-            Date date = new Date(offline_player.getLastPlayed());
-            DateFormat formatter = new SimpleDateFormat(plugin.getConfig().getString("format.date"));
-            String stringDate = formatter.format(date).replace(":", " / ");
 
-            List<String> list = plugin.getConfig().getStringList("format.offline");
-            for(int i = 0; i < 4; i++){
-                sign.setLine(i, ChatColor.translateAlternateColorCodes('&', list.get(i)
-                        .replace("%player%", offline_player.getName())
-                        .replace("%since%", stringDate)));
-            }
+        Date date = new Date(offline_player.getLastPlayed());
+        DateFormat formatter = new SimpleDateFormat(plugin.getConfig().getString("format.date"));
+        String stringDate = formatter.format(date).replace(":", " / ");
+
+        List<String> list = plugin.getConfig().getStringList("format.offline");
+        for (int i = 0; i < 4; i++) {
+            sign.setLine(i, ChatColor.translateAlternateColorCodes('&', list.get(i)
+                    .replace("%player%", offline_player.getName())
+                    .replace("%since%", stringDate)));
         }
+
 
         sign.update();
     }

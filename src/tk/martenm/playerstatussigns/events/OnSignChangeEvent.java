@@ -35,7 +35,6 @@ public class OnSignChangeEvent implements Listener {
 
         //Sign sign = (Sign) event.getBlock().getState();
 
-
         if(!(event.getLine(0).equalsIgnoreCase("[pss]") || event.getLine(0).equalsIgnoreCase("[pstatus]") || event.getLine(0).equalsIgnoreCase("[playerstatus]"))){
             return;
         }
