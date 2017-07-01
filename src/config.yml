@@ -12,6 +12,9 @@
 #  Place Holders
 #  %player% - The players name
 #
+#
+clickable signs: true
+#
 format:
 #
 # Format date
@@ -37,6 +40,19 @@ format:
     - "%player%"
     - "&1AFK"
     - "x-&1v&r-x"
+#
+# The format shown when a sign is clicked
+#   %name%      - The players name
+#   %world%     - The world a player is in.
+#   %x% %y% %z% - The X Y or Z coord of a player.
+#
+#   If the VAULT plugin is present.
+#   %balance%   - The amount of money a player has
+#   %prefix%    - The players prefix
+#   %suffix%    - The players suffix
+  click:
+    - ""
+#
 #
 messages:
   no permission: "&cNot enough permissions."

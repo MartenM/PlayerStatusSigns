@@ -24,7 +24,7 @@ public class OnBlockBreakEvent implements Listener{
     public void onBlockBreakEvent(BlockBreakEvent event){
         if(event.getBlock().getState() instanceof Sign){
             for(PlayerStatusSign pss : plugin.signs){
-                if(pss.getLocation() == event.getBlock().getLocation()){
+                if(pss.getLocation().equals(event.getBlock().getLocation())){
                     plugin.signs.remove(pss);
                     event.getPlayer().sendMessage(ChatColor.YELLOW + "Successfully removed the player status sign.");
                     break;

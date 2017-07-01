@@ -7,10 +7,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import tk.martenm.playerstatussigns.commands.PlayerStatusSignsCommand;
-import tk.martenm.playerstatussigns.events.OnPlayerAfkEvent;
-import tk.martenm.playerstatussigns.events.OnPlayerJoinEvent;
-import tk.martenm.playerstatussigns.events.OnPlayerQuitEvent;
-import tk.martenm.playerstatussigns.events.OnSignChangeEvent;
+import tk.martenm.playerstatussigns.events.*;
 import tk.martenm.playerstatussigns.objects.PlayerStatusSign;
 import tk.martenm.playerstatussigns.utils.Config;
 
@@ -70,6 +67,7 @@ public class MainClass extends JavaPlugin {
         pm.registerEvents(new OnSignChangeEvent(this), this);
         pm.registerEvents(new OnPlayerJoinEvent(this), this);
         pm.registerEvents(new OnPlayerQuitEvent(this), this);
+        pm.registerEvents(new OnBlockBreakEvent(this), this);
 
         if(essentials != null){
             pm.registerEvents(new OnPlayerAfkEvent(this), this);

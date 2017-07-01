@@ -64,13 +64,22 @@ public class PlayerStatusSign {
                 sign.setLine(i, ChatColor.translateAlternateColorCodes('&', list.get(i)
                         .replace("%player%", player.getName())));
             }
+
+            sign.update();
             return;
         }
         //Player is NOT online
 
         Date date = new Date(offline_player.getLastPlayed());
         DateFormat formatter = new SimpleDateFormat(plugin.getConfig().getString("format.date"));
-        String stringDate = formatter.format(date).replace(":", " / ");
+        String stringDate;
+        System.out.println(offline_player.getLastPlayed());
+
+        if(offline_player.getLastPlayed() != 0) {
+            stringDate = formatter.format(date).replace(":", " / ");
+        } else{
+            stringDate = "Unknown";
+        }
 
         List<String> list = plugin.getConfig().getStringList("format.offline");
         for (int i = 0; i < 4; i++) {
@@ -78,7 +87,6 @@ public class PlayerStatusSign {
                     .replace("%player%", offline_player.getName())
                     .replace("%since%", stringDate)));
         }
-
 
         sign.update();
     }

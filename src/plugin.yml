@@ -1,9 +1,9 @@
 main: tk.martenm.playerstatussigns.MainClass
 name: PlayerStatusSigns
-version: 2.0.0
+version: 2.0.2
 prefix: Player Status Signs
 author: [MartenM]
-softdepend: [Essentials]
+softdepend: [Essentials, Multiverse-Core]
 description: "Player status signs allows you to create signs that shows the status of a player!"
 commands:
   playerstatussigns:

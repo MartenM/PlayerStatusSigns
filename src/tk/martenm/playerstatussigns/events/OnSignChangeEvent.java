@@ -1,6 +1,7 @@
 package tk.martenm.playerstatussigns.events;
 
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
@@ -40,14 +41,15 @@ public class OnSignChangeEvent implements Listener {
         }
 
         //Player status sign detected. Begin construction.
-        String user = event.getLine(1);
-        Player target = plugin.getServer().getPlayer(user);
-        if(target == null || user.equalsIgnoreCase("")){
-            event.getPlayer().sendMessage(ChatColor.RED + "That player has never played on this server before!");
+        String user = event.getLine(1).replaceAll("\\s","");
+        if(user.equalsIgnoreCase("") || user == null){
+            event.getPlayer().sendMessage(ChatColor.RED + "That is not a valid player name.");
             event.getBlock().breakNaturally();
             event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_ENDERDRAGON_HURT, 1, 3);
             return;
         }
+
+        OfflinePlayer target = plugin.getServer().getOfflinePlayer(user);
 
         if(target == event.getPlayer()){
             if(!event.getPlayer().hasPermission("playerstatussigns.create.other")){
