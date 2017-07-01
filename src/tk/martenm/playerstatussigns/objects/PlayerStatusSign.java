@@ -1,23 +1,22 @@
-package tk.martem.playerstatussigns.objects;
+package tk.martenm.playerstatussigns.objects;
 
-import com.sun.org.apache.xerces.internal.xs.StringList;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
-import tk.martem.playerstatussigns.MainClass;
+import tk.martenm.playerstatussigns.MainClass;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 /**
  * Created by Marten on 1-7-2017.
- * Simple player status sign holder
+ * The PlayerStatusSign class
  */
 public class PlayerStatusSign {
 
@@ -40,10 +39,13 @@ public class PlayerStatusSign {
             return;
         }
 
-        Player player = plugin.getServer().getPlayer(uuid);
+        OfflinePlayer offline_player = plugin.getServer().getOfflinePlayer(uuid);
 
         //Player is online
-        if(player.isOnline()){
+        if(offline_player.isOnline()){
+            Player player = plugin.getServer().getPlayer(uuid);
+
+            //Essentials AFK check
             if(plugin.essentials != null){
                 if(plugin.essentials.getUser(uuid).isAfk()){
                     List<String> list = plugin.getConfig().getStringList("format.afk");
@@ -51,10 +53,12 @@ public class PlayerStatusSign {
                         sign.setLine(i, ChatColor.translateAlternateColorCodes('&', list.get(i)
                                 .replace("%player%", player.getName())));
                     }
+                    sign.update();
+                    return;
                 }
             }
 
-            //Online and not afk
+            //Online and/or not afk
             List<String> list = plugin.getConfig().getStringList("format.online");
             for(int i = 0; i < 4; i++){
                 sign.setLine(i, ChatColor.translateAlternateColorCodes('&', list.get(i)
@@ -63,18 +67,19 @@ public class PlayerStatusSign {
         }
         //Player is NOT online
         else{
-            Date date = new Date(player.getLastPlayed());
+            Date date = new Date(offline_player.getLastPlayed());
             DateFormat formatter = new SimpleDateFormat(plugin.getConfig().getString("format.date"));
-            String stringDate = formatter.format(date);
+            String stringDate = formatter.format(date).replace(":", " / ");
 
-
-            List<String> list = plugin.getConfig().getStringList("format.afk");
+            List<String> list = plugin.getConfig().getStringList("format.offline");
             for(int i = 0; i < 4; i++){
                 sign.setLine(i, ChatColor.translateAlternateColorCodes('&', list.get(i)
-                        .replace("%player%", player.getName())
+                        .replace("%player%", offline_player.getName())
                         .replace("%since%", stringDate)));
             }
         }
+
+        sign.update();
     }
 
     private Sign getSign() throws Exception {
@@ -83,5 +88,22 @@ public class PlayerStatusSign {
             return (Sign) block.getState();
         }
         throw new Exception("No sign located");
+    }
+
+    public boolean signExists(){
+        try{
+            getSign();
+            return true;
+        } catch (Exception ex){
+            return false;
+        }
+    }
+
+    public Location getLocation(){
+        return loc;
+    }
+
+    public UUID getUuid(){
+        return uuid;
     }
 }
