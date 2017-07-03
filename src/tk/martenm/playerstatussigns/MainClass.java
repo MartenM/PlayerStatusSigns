@@ -28,6 +28,9 @@ public class MainClass extends JavaPlugin {
     public Essentials essentials;
     private Config signSaves;
 
+    private boolean usesEssentials = false;
+    public boolean usesPlaceHolderApi = false;
+
     public void onEnable(){
 
         signs = new ArrayList<>();
@@ -35,6 +38,7 @@ public class MainClass extends JavaPlugin {
         if(Bukkit.getPluginManager().isPluginEnabled("Essentials")){
             essentials = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
             logger.info("Essentials plugin was found. Using it to determine if someone is AFK.");
+            usesEssentials = true;
         }
         else{
             logger.info("Essentials was not found. Cannot determine AFK.");
@@ -68,6 +72,7 @@ public class MainClass extends JavaPlugin {
         pm.registerEvents(new OnPlayerJoinEvent(this), this);
         pm.registerEvents(new OnPlayerQuitEvent(this), this);
         pm.registerEvents(new OnBlockBreakEvent(this), this);
+        pm.registerEvents(new OnPlayerInteractEvent(this), this);
 
         if(essentials != null){
             pm.registerEvents(new OnPlayerAfkEvent(this), this);

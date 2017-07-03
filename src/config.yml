@@ -9,9 +9,18 @@
 #    By: MartenM
 #
 #----------------------------------------------------------------------------------------------
-#  Place Holders
-#  %player% - The players name
+# PlaceHolders
+#   %name%      - The players name
+#   %world%     - The world a player is in.
+#   %x% %y% %z% - The X Y or Z coord of a player.
 #
+#   If Essentials plugin is present:
+#   %balance%   - The amount of money a player has
+#
+#   If the PlaceHolderAPI plugin is present:
+#   All the placeholderapi placeholders you have installed.
+#   NOTE: Only works for ONLINE players (so afk players will work too)
+#-----------------------------------------------------------------------------------------------
 #
 clickable signs: true
 #
@@ -42,16 +51,28 @@ format:
     - "x-&1v&r-x"
 #
 # The format shown when a sign is clicked
-#   %name%      - The players name
-#   %world%     - The world a player is in.
-#   %x% %y% %z% - The X Y or Z coord of a player.
-#
-#   If the VAULT plugin is present.
-#   %balance%   - The amount of money a player has
-#   %prefix%    - The players prefix
-#   %suffix%    - The players suffix
-  click:
+  click online:
     - ""
+    - "&8&l────────────────────────┤"
+    - "    &6%player%"
+    - ""
+    - "&ePosition: &7%world% %x% %y% %z%"
+    - "&eThis player is currently &aonline!"
+    - "&8&l────────────────────────┤"
+  click offline:
+    - ""
+    - "&8&l────────────────────────┤"
+    - "    &6%player%"
+    - ""
+    - "&eThis player is currently &coffline!"
+    - "&8&l────────────────────────┤"
+  click afk:
+    - ""
+    - "&8&l────────────────────────┤"
+    - "    &6%player%"
+    - ""
+    - "&eThis player is currently &1AFK!"
+    - "&8&l────────────────────────┤"
 #
 #
 messages:
