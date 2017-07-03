@@ -44,6 +44,11 @@ public class MainClass extends JavaPlugin {
             logger.info("Essentials was not found. Cannot determine AFK.");
         }
 
+        if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")){
+            logger.info("PlaceholderAPI has been found!");
+            usesPlaceHolderApi = true;
+        }
+
         registerConfigs();
         registerCommands();
         registerEvents();

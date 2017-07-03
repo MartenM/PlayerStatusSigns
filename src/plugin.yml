@@ -1,6 +1,6 @@
 main: tk.martenm.playerstatussigns.MainClass
 name: PlayerStatusSigns
-version: 2.1.0
+version: 2.1.1
 prefix: Player Status Signs
 author: [MartenM]
 softdepend: [Essentials, Multiverse-Core]
